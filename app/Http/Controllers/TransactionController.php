@@ -22,9 +22,10 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $transaction = $this->transaction->getAll($request);
+        return TransactionResource::collection($transaction);
     }
 
     /**
@@ -45,7 +46,8 @@ class TransactionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $transaction = $this->transaction->findOrFail($id);
+        return new TransactionResource($transaction);
     }
 
     /**

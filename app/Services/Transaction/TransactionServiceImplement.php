@@ -29,6 +29,18 @@ class TransactionServiceImplement extends Service implements TransactionService
   }
 
   // Define your custom methods :)
+  public function getAll($request)
+  {
+    return $this->mainRepository->getAll($request)
+      ->load('details');
+  }
+
+  public function findOrFail($id)
+  {
+    return $this->mainRepository->findOrFail($id)
+      ->load('details');
+  }
+
   public function create($data)
   {
     $transactionCode =  Str::random(10);
